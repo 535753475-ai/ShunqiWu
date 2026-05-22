@@ -113,6 +113,32 @@ function switchPdfGallery(btn, direction) {
   dots[newIdx].style.background = '#FFB800';
 }
 
+// 触摸滑动切换（移动端）
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', function(e) {
+  const gallery = e.target.closest('.project-image');
+  if (!gallery) return;
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+  const gallery = e.target.closest('.project-image');
+  if (!gallery) return;
+  const dx = (e.changedTouches[0]?.clientX || 0) - touchStartX;
+  const dy = (e.changedTouches[0]?.clientY || 0) - touchStartY;
+  // 水平滑动距离 > 40px 且大于垂直滑动距离
+  if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+  e.preventDefault();
+  if (gallery.querySelector('.gallery-img')) {
+    doSwitchGallery(gallery, dx < 0 ? 1 : -1);
+  } else if (gallery.querySelector('.gallery-pdf')) {
+    switchPdfGallery(gallery.querySelector('.gallery-btn'), dx < 0 ? 1 : -1);
+  }
+});
+
 // 鼠标滚轮 + 键盘切换
 document.addEventListener('wheel', function(e) {
   const gallery = e.target.closest('.project-image');
