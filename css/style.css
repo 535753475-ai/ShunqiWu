@@ -678,8 +678,12 @@ img { max-width: 100%; display: block; }
 
 .cards-grid-sm {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
+}
+
+.cards-grid-sm .card {
+  max-width: 320px;
 }
 
 /* ===== Honor / Projects Card ===== */
@@ -769,23 +773,27 @@ img { max-width: 100%; display: block; }
 }
 
 .cards-grid-sm .card-img {
-  aspect-ratio: 3 / 2.2;
+  aspect-ratio: 16 / 10;
+}
+
+.cards-grid-sm .card-gallery {
+  aspect-ratio: 16 / 10;
 }
 
 .cards-grid-sm .card-body {
-  padding: 14px 14px;
+  padding: 12px 14px;
 }
 
 .cards-grid-sm .card-body h3 {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .cards-grid-sm .card-body p {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
 }
 
 .cards-grid-sm .card-tags span {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   padding: 2px 8px;
 }
 
