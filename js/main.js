@@ -15,58 +15,25 @@ window.addEventListener('scroll', handleScroll);
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 
-menuToggle.addEventListener('click', () => {
+menuToggle.addEventListener('click', function() {
   menuToggle.classList.toggle('active');
   navLinks.classList.toggle('active');
 });
 
 // 点击导航链接后关闭菜单
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
+navLinks.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
     menuToggle.classList.remove('active');
     navLinks.classList.remove('active');
   });
 });
 
-// Intersection Observer — 滚动淡入动画
-const revealElements = document.querySelectorAll(
-  '.skill-card, .project-card, .about-grid, .contact-item, .section-title'
-);
-
-// 为卡片添加 delay 类
-revealElements.forEach((el, i) => {
-  if (el.classList.contains('skill-card') || el.classList.contains('project-card')) {
-    el.classList.add('reveal');
-    // 同行卡片同步出现（每行最多3个，所以用 mod 3）
-    const delayClass = 'reveal-delay-' + ((i % 3) + 1);
-    el.classList.add(delayClass);
-  } else if (el.classList.contains('contact-item')) {
-    el.classList.add('reveal');
-    el.classList.add('reveal-delay-' + ((i % 4) + 1));
-  } else {
-    el.classList.add('reveal');
-  }
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-);
-
-revealElements.forEach((el) => observer.observe(el));
-
-// 平滑滚动兼容（针对不支持 scroll-behavior 的浏览器）
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    var targetId = this.getAttribute('href');
     if (targetId === '#') return;
-    const target = document.querySelector(targetId);
+    var target = document.querySelector(targetId);
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
@@ -74,98 +41,92 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// 工法证书图片切换
-function switchGallery(btn, direction) {
-  doSwitchGallery(btn.parentElement, direction);
-}
+// Intersection Observer — 滚动淡入动画
+var revealElements = document.querySelectorAll('.card, .project-card, .about-grid, .contact-item, .section-title, .gallery-item');
+revealElements.forEach(function(el) { el.classList.add('reveal'); });
 
-function doSwitchGallery(container, direction) {
-  const imgs = container.querySelectorAll('.gallery-img');
-  const dots = container.querySelectorAll('.gallery-dot');
-  const activeIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+var observer = new IntersectionObserver(
+  function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+);
+
+revealElements.forEach(function(el) { observer.observe(el); });
+
+// 图片轮播切换
+function switchGallery(btn, direction) {
+  var container = btn.parentElement;
+  var imgs = container.querySelectorAll('.gallery-img');
+  var dots = container.querySelectorAll('.gallery-dot');
+  var activeIdx = -1;
+  for (var i = 0; i < imgs.length; i++) {
+    if (imgs[i].classList.contains('active')) { activeIdx = i; break; }
+  }
   if (activeIdx === -1) return;
+
   imgs[activeIdx].classList.remove('active');
   imgs[activeIdx].style.display = 'none';
-  dots[activeIdx].classList.remove('active');
-  dots[activeIdx].style.background = 'rgba(255,255,255,0.6)';
-  const newIdx = (activeIdx + direction + imgs.length) % imgs.length;
+  if (dots[activeIdx]) {
+    dots[activeIdx].classList.remove('active');
+  }
+
+  var newIdx = (activeIdx + direction + imgs.length) % imgs.length;
+
   imgs[newIdx].classList.add('active');
   imgs[newIdx].style.display = 'block';
-  dots[newIdx].classList.add('active');
-  dots[newIdx].style.background = '#FFB800';
+  if (dots[newIdx]) {
+    dots[newIdx].classList.add('active');
+  }
 }
 
-// PDF 页面切换
-function switchPdfGallery(btn, direction) {
-  const container = btn.parentElement;
-  const pages = container.querySelectorAll('.gallery-pdf');
-  const dots = container.querySelectorAll('.pdf-dot');
-  const activeIdx = Array.from(pages).findIndex(p => p.classList.contains('active'));
-  if (activeIdx === -1) return;
-  pages[activeIdx].classList.remove('active');
-  pages[activeIdx].style.display = 'none';
-  dots[activeIdx].classList.remove('active');
-  dots[activeIdx].style.background = 'rgba(255,255,255,0.6)';
-  const newIdx = (activeIdx + direction + pages.length) % pages.length;
-  pages[newIdx].classList.add('active');
-  pages[newIdx].style.display = 'block';
-  dots[newIdx].classList.add('active');
-  dots[newIdx].style.background = '#FFB800';
+// Lightbox
+function openLightbox(src, caption) {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-caption');
+  img.src = src;
+  img.alt = caption;
+  cap.textContent = caption;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-// 触摸滑动切换（移动端）
-let touchStartX = 0;
-let touchStartY = 0;
+function closeLightbox() {
+  var lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ESC 关闭 lightbox
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
+
+// 触摸滑动切换
+var touchStartX = 0;
+var touchStartY = 0;
 
 document.addEventListener('touchstart', function(e) {
-  const gallery = e.target.closest('.project-image');
+  var gallery = e.target.closest('.card-gallery');
   if (!gallery) return;
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
 }, { passive: true });
 
 document.addEventListener('touchend', function(e) {
-  const gallery = e.target.closest('.project-image');
+  var gallery = e.target.closest('.card-gallery');
   if (!gallery) return;
-  const dx = (e.changedTouches[0]?.clientX || 0) - touchStartX;
-  const dy = (e.changedTouches[0]?.clientY || 0) - touchStartY;
-  // 水平滑动距离 > 40px 且大于垂直滑动距离
+  var dx = (e.changedTouches[0] ? e.changedTouches[0].clientX : 0) - touchStartX;
+  var dy = (e.changedTouches[0] ? e.changedTouches[0].clientY : 0) - touchStartY;
   if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
   e.preventDefault();
-  if (gallery.querySelector('.gallery-img')) {
-    doSwitchGallery(gallery, dx < 0 ? 1 : -1);
-  } else if (gallery.querySelector('.gallery-pdf')) {
-    switchPdfGallery(gallery.querySelector('.gallery-btn'), dx < 0 ? 1 : -1);
-  }
-});
-
-// 鼠标滚轮 + 键盘切换
-document.addEventListener('wheel', function(e) {
-  const gallery = e.target.closest('.project-image');
-  if (!gallery) return;
-  if (gallery.querySelector('.gallery-img')) {
-    e.preventDefault();
-    doSwitchGallery(gallery, e.deltaY > 0 ? 1 : -1);
-  } else if (gallery.querySelector('.gallery-pdf')) {
-    e.preventDefault();
-    const pages = gallery.querySelectorAll('.gallery-pdf');
-    const activeIdx = Array.from(pages).findIndex(p => p.classList.contains('active'));
-    if (activeIdx === -1) return;
-    // Simulate button click for PDF gallery
-    switchPdfGallery(gallery.querySelector('.gallery-btn'), e.deltaY > 0 ? 1 : -1);
-  }
-}, { passive: false });
-
-document.addEventListener('keydown', function(e) {
-  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-  const hovered = document.querySelector(':hover');
-  if (!hovered) return;
-  const gallery = hovered.closest('.project-image');
-  if (!gallery) return;
-  e.preventDefault();
-  if (gallery.querySelector('.gallery-img')) {
-    doSwitchGallery(gallery, e.key === 'ArrowRight' ? 1 : -1);
-  } else if (gallery.querySelector('.gallery-pdf')) {
-    switchPdfGallery(gallery.querySelector('.gallery-btn'), e.key === 'ArrowRight' ? 1 : -1);
-  }
+  var btn = gallery.querySelector('.gallery-btn');
+  if (btn) switchGallery(btn, dx < 0 ? 1 : -1);
 });
