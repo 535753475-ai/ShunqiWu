@@ -873,8 +873,10 @@ img { max-width: 100%; display: block; }
 /* ===== Project Gallery (quality photos) ===== */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .gallery-item {
@@ -1108,11 +1110,11 @@ img { max-width: 100%; display: block; }
   .stat-number { font-size: 1.6rem; }
 
   .cards-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .project-wide { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(5, 1fr); gap: 10px; }
 }
