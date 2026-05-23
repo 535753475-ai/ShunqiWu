@@ -42,7 +42,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 });
 
 // Intersection Observer — 滚动淡入动画
-var revealElements = document.querySelectorAll('.card, .project-card, .about-grid, .contact-item, .section-title, .gallery-item');
+var revealElements = document.querySelectorAll('.card, .photo-item, .about-grid, .contact-item, .section-title');
 revealElements.forEach(function(el) { el.classList.add('reveal'); });
 
 var observer = new IntersectionObserver(
