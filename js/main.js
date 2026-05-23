@@ -130,3 +130,14 @@ document.addEventListener('touchend', function(e) {
   var btn = gallery.querySelector('.gallery-btn');
   if (btn) switchGallery(btn, dx < 0 ? 1 : -1);
 });
+
+// 鼠标滚轮切换图片（桌面端）
+document.addEventListener('wheel', function(e) {
+  var gallery = e.target.closest('.card-gallery');
+  if (!gallery) return;
+  var imgs = gallery.querySelectorAll('.gallery-img');
+  if (imgs.length < 2) return;
+  e.preventDefault();
+  var btn = gallery.querySelector('.gallery-btn');
+  if (btn) switchGallery(btn, e.deltaY > 0 ? 1 : -1);
+}, { passive: false });
