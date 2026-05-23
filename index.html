@@ -52,20 +52,98 @@
         <h2 class="section-title">关于我</h2>
         <div class="section-line"></div>
       </div>
+
       <div class="about-grid">
+        <!-- 左侧文字 -->
         <div class="about-text">
-          <p>我是一名<span class="highlight">建筑工程技术质量负责人</span>，持有一级建造师（建筑工程）、二级建造师执业资格，建筑工程及市政工程双专业中级职称。</p>
+          <p class="about-lead">我是一名<span class="highlight">建筑工程技术质量负责人</span>，持有一级建造师（建筑工程）、二级建造师执业资格，建筑工程及市政工程双专业中级职称。</p>
+
+          <div class="about-quote">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent)" opacity="0.35"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
+            <p>精工筑品质，匠心造未来。每一道工序都是承诺，每一处细节见证专业。</p>
+          </div>
+
           <p>2016年从业至今，从测量员到技术质量部负责人，扎根施工现场一线9年。擅长方案编制、质量管理、绿色施工与新技术应用，编制施工方案150余篇。</p>
-          <p>工作之余，热爱学习充电、参加辩论赛与读书会、在气排球赛场上挥洒汗水。2025年起投身海外矿山项目，持续成长。</p>
+
+          <!-- 技能标签云 -->
+          <div class="about-tags">
+            <span>方案编制</span><span>质量管理</span><span>绿色施工</span><span>BIM技术</span><span>新技术应用</span><span>团队管理</span><span>施工组织</span><span>创优评先</span>
+          </div>
+
           <div class="about-stats">
-            <div class="stat"><span class="stat-number">9+</span><span class="stat-label">年经验</span></div>
-            <div class="stat"><span class="stat-number">2</span><span class="stat-label">实用新型专利</span></div>
-            <div class="stat"><span class="stat-number">2</span><span class="stat-label">部级工法</span></div>
+            <div class="stat">
+              <span class="stat-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </span>
+              <span class="stat-number">9+</span>
+              <span class="stat-label">年经验</span>
+            </div>
+            <div class="stat">
+              <span class="stat-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="stat-number">2</span>
+              <span class="stat-label">实用新型专利</span>
+            </div>
+            <div class="stat">
+              <span class="stat-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              </span>
+              <span class="stat-number">2</span>
+              <span class="stat-label">部级工法</span>
+            </div>
           </div>
         </div>
+
+        <!-- 右侧视觉 -->
         <div class="about-visual">
-          <div class="avatar-placeholder">
-            <img src="images/avatar_test.jpg" alt="吴顺麒" style="width:100%;height:100%;object-fit:cover;">
+          <div class="avatar-wrapper">
+            <div class="avatar-ring ring-1"></div>
+            <div class="avatar-ring ring-2"></div>
+            <div class="avatar-ring ring-3"></div>
+            <div class="avatar-placeholder">
+              <img src="images/avatar_test.jpg" alt="吴顺麒">
+            </div>
+            <div class="avatar-badge">
+              <span>一级建造师</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 职业时间线 -->
+      <div class="career-timeline">
+        <div class="timeline-track"></div>
+        <div class="timeline-items">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2016</span>
+            <span class="timeline-role">测量员</span>
+            <span class="timeline-desc">入行起点，扎实基础</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2020</span>
+            <span class="timeline-role">技术员</span>
+            <span class="timeline-desc">G地块 · 13.9万㎡</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2021</span>
+            <span class="timeline-role">技术质量部负责人</span>
+            <span class="timeline-desc">C地块 · 16.6万㎡</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2023</span>
+            <span class="timeline-role">一级建造师</span>
+            <span class="timeline-desc">建筑工程专业</span>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2025</span>
+            <span class="timeline-role">海外工程师</span>
+            <span class="timeline-desc">刚果(金)矿山项目</span>
           </div>
         </div>
       </div>
