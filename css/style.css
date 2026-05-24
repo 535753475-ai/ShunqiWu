@@ -292,6 +292,58 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; gap: 8px;
 }
 
+/* ===== Project Blocks ===== */
+.project-block {
+  margin-bottom: 60px;
+}
+.project-block:last-child {
+  margin-bottom: 0;
+}
+.project-block-header {
+  text-align: center; margin-bottom: 38px;
+  padding-bottom: 22px; position: relative;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.project-block-header::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 50%; transform: translateX(-50%);
+  width: 44px; height: 3px;
+  background: var(--color-accent); border-radius: 2px;
+}
+.project-block-badge {
+  display: inline-block;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-bg);
+  padding: 3px 12px; border-radius: 4px;
+  margin-bottom: 10px;
+}
+.project-block-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--color-primary); margin-bottom: 4px;
+}
+.project-block-sub {
+  font-size: 0.82rem; color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+.project-section-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 32px 0 20px;
+}
+.project-section-divider::before,
+.project-section-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--color-border-light);
+}
+.project-section-divider span {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
 /* ===== About Section ===== */
 .about { position: relative; overflow: hidden; }
 .about::before {
