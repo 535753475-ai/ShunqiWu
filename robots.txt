@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://535753475-ai.github.io/ShunqiWu/sitemap.xml
