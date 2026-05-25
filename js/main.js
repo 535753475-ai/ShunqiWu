@@ -1,15 +1,22 @@
-// 导航栏滚动效果
-const navbar = document.getElementById('navbar');
+// 导航栏滚动效果 — rAF 节流
+var navbar = document.getElementById('navbar');
+var ticking = false;
 
 function handleScroll() {
-  if (window.scrollY > 60) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
+  if (!ticking) {
+    requestAnimationFrame(function() {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      ticking = false;
+    });
+    ticking = true;
   }
 }
 
-window.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', handleScroll, { passive: true });
 
 // 移动端菜单
 const menuToggle = document.getElementById('menuToggle');
